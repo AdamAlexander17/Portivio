@@ -3,10 +3,11 @@
 Each one works on one portfolio: `?user=<username>` picks it, and without
 that parameter it is the primary (admin's) portfolio.
 """
+import re
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request, status
-from fastapi.responses import FileResponse
+from fastapi.responses import Response
 
 from app.api.deps import DbSession, PublicOwner
 from app.core.config import settings
@@ -83,9 +84,13 @@ def send_message(data: MessageCreate, owner: PublicOwner, db: DbSession):
 @router.get("/resume")
 def download_resume(request: Request, owner: PublicOwner, db: DbSession):
     profile = SiteService(db, owner.id).get_profile()
-    path = file_service.resolve(profile.resume_file)
-    if not path:
+    data = file_service.read(profile.resume_file)
+    if data is None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "No resume has been uploaded yet.")
     AnalyticsService(db, owner.id).record(KIND_RESUME, request)
-    name = "-".join(profile.name.split()) or "Resume"
-    return FileResponse(path, filename=f"{name}-Resume{Path(path).suffix}")
+    name = "-".join(re.findall(r"[A-Za-z0-9]+", profile.name)) or "Resume"
+    filename = f"{name}-Resume{Path(profile.resume_file).suffix}"
+    return Response(
+        data, media_type="application/octet-stream",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )

@@ -47,6 +47,11 @@ class Settings(BaseSettings):
     SMTP_FROM: str = ""
 
     UPLOAD_DIR: str = "uploads"
+    # Where uploads are kept. Empty: the UPLOAD_DIR folder on this machine. On a host whose disk is wiped
+    # on every restart (Render's free plan), set it to the "cloudinary://key:secret@cloud" line from the
+    # Cloudinary dashboard and files are stored there instead.
+    CLOUDINARY_URL: str = ""
+    CLOUDINARY_FOLDER: str = "portivio"
     MAX_IMAGE_MB: int = 8
     MAX_RESUME_MB: int = 10
 

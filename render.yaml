@@ -33,6 +33,9 @@ services:
         value: admin
       - key: ADMIN_PASSWORD
         sync: false
+      # Uploads are kept on Cloudinary, because this plan's disk is wiped on every restart.
+      - key: CLOUDINARY_URL
+        sync: false
       # The address of the website on Vercel, filled in once it exists.
       - key: CORS_ORIGINS
         sync: false
