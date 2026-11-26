@@ -1,0 +1,40 @@
+# Render Blueprint: the Portivio API (FastAPI) on the free plan.
+# In Render: New > Blueprint > pick this repository. Values marked "sync: false" are asked for there
+# and never stored in this file.
+services:
+  - type: web
+    name: portivio-api
+    runtime: python
+    plan: free
+    region: singapore
+    rootDir: Backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.14.0
+      - key: DB_HOST
+        value: gateway01.ap-southeast-1.prod.aws.tidbcloud.com
+      - key: DB_PORT
+        value: 4000
+      - key: DB_NAME
+        value: Profile_db
+      - key: DB_SSL
+        value: true
+      - key: DB_SSL_CA
+        value: /etc/ssl/certs/ca-certificates.crt
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
+      # The address of the website on Vercel, filled in once it exists.
+      - key: CORS_ORIGINS
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
