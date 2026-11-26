@@ -1,0 +1,1735 @@
+/* ------------------------------------------------------------------
+   The product's landing page (src/pages/Landing.jsx).
+   It has its own look, the same indigo as the panel, and does not follow
+   any site theme. Mobile first; wider layouts from 700px and 980px.
+------------------------------------------------------------------ */
+.land {
+  --purple: #5b4dff;
+  --purple-dark: #4a3de0;
+  --ink: #14141f;
+  --ink-soft: #3d3d4e;
+  --muted: #74748a;
+  --line: #e9e9f0;
+  --tint: #f6f6f9;
+  --soft: #eeecff;
+
+  min-height: 100vh;
+  background: #fff;
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.land h1,
+.land h2,
+.land h3 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.land-wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.land-wrap--narrow {
+  max-width: 760px;
+}
+
+/* ---- Buttons and small pieces ---- */
+.land-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 10px 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  font-size: 0.950rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.land-btn:hover {
+  border-color: #cfcfe0;
+}
+
+.land-btn--small {
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 0.880rem;
+}
+
+.land-btn--primary {
+  border-color: var(--purple);
+  background: var(--purple);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(91, 77, 255, 0.28);
+}
+
+.land-btn--primary:hover {
+  border-color: var(--purple-dark);
+  background: var(--purple-dark);
+}
+
+.land-btn--light {
+  border-color: #fff;
+  color: var(--purple);
+}
+
+.land-link {
+  padding: 8px 6px;
+  font-size: 0.900rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.land-link:hover {
+  color: var(--purple);
+}
+
+.land-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.100rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.land-brand__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--purple);
+  color: #fff;
+}
+
+.land-tag {
+  display: table;
+  margin: 0 auto 14px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--soft);
+  font-size: 0.700rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.land-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--purple);
+  color: #fff;
+}
+
+.land-icon--soft {
+  background: var(--soft);
+  color: var(--purple);
+}
+
+/* ---- Navbar ---- */
+.land-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.land-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 66px;
+}
+
+.land-nav__links {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  padding: 8px 20px 16px;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.land-nav__links.is-open {
+  display: flex;
+}
+
+.land-nav__links a {
+  padding: 12px 0;
+  font-size: 0.950rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.land-nav__links a:hover {
+  color: var(--purple);
+}
+
+.land-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.land-nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--ink);
+}
+
+/* ---- Hero ---- */
+.land-hero {
+  padding: 48px 0 56px;
+  background: linear-gradient(180deg, #f1efff 0%, #fff 78%);
+  overflow: hidden;
+}
+
+.land-hero__grid {
+  display: grid;
+  gap: 44px;
+  align-items: center;
+}
+
+.land-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 5px 14px 5px 5px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.800rem;
+  color: var(--ink-soft);
+}
+
+.land-pill b {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--soft);
+  color: var(--purple);
+}
+
+.land-hero h1 {
+  font-size: clamp(2.300rem, 7vw, 3.600rem);
+}
+
+.land-hero h1 span {
+  color: var(--purple);
+}
+
+.land-lead {
+  margin-top: 18px;
+  max-width: 30em;
+  font-size: 1.050rem;
+  color: var(--ink-soft);
+}
+
+.land-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.land-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 20px;
+  font-size: 0.840rem;
+  color: var(--muted);
+}
+
+.land-checks li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.land-checks svg {
+  color: #12924f;
+}
+
+/* The product picture */
+.land-mock {
+  position: relative;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 18px 0 44px;
+}
+
+.land-mock__browser {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 30px 70px rgba(60, 50, 160, 0.18);
+  overflow: hidden;
+}
+
+.land-mock__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  background: #fafafc;
+}
+
+.land-mock__bar i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #dcdce6;
+}
+
+.land-mock__bar span {
+  flex: 1;
+  margin-left: 8px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--line);
+  font-size: 0.700rem;
+  color: var(--muted);
+}
+
+.land-mock__browser .theme-preview {
+  border: 0;
+  border-radius: 0;
+  font-size: 14px;
+}
+
+.land-mock__browser .theme-preview__title {
+  font-size: 26px;
+}
+
+.land-mock__live,
+.land-mock__switch {
+  position: absolute;
+  z-index: 2;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(20, 20, 31, 0.14);
+}
+
+.land-mock__live {
+  top: 0;
+  left: -6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 8px;
+  font-size: 0.800rem;
+  font-weight: 600;
+}
+
+.land-mock__live span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #12924f;
+  color: #fff;
+}
+
+.land-mock__switch {
+  left: -6px;
+  bottom: 0;
+  padding: 10px;
+}
+
+.land-mock__switch p {
+  margin-bottom: 6px;
+  font-size: 0.700rem;
+  font-weight: 700;
+}
+
+.land-mock__switch > div {
+  display: flex;
+  gap: 6px;
+}
+
+.land-mock__switch .theme-preview {
+  width: 74px;
+  height: 46px;
+  border-radius: 6px;
+  font-size: 4px;
+}
+
+.land-mock__switch .theme-preview__title {
+  font-size: 7px;
+  margin-bottom: 2px;
+}
+
+.land-mock__switch .theme-preview__btn,
+.land-mock__switch .eyebrow {
+  display: none;
+}
+
+.land-mock__switch .theme-preview__nav,
+.land-mock__switch .theme-preview__hero {
+  padding: 3px 5px;
+}
+
+.land-mock__switch .logo {
+  font-size: 5px !important;
+}
+
+/* ---- Strip ---- */
+.land-strip {
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+
+.land-strip p {
+  font-size: 0.780rem;
+  color: var(--muted);
+}
+
+.land-strip ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 30px;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #8f8fa3;
+}
+
+/* ---- Sections ---- */
+.land-section {
+  padding: 68px 0;
+  scroll-margin-top: 66px;
+}
+
+.land-section--tint {
+  background: var(--tint);
+}
+
+.land-section h2,
+.land-dark h2 {
+  font-size: clamp(1.700rem, 4.600vw, 2.400rem);
+}
+
+.land-section h2 {
+  max-width: 20em;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.land-sub {
+  max-width: 34em;
+  margin: 14px auto 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+.land-steps,
+.land-features,
+.land-themes {
+  display: grid;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.land-steps li {
+  position: relative;
+  padding: 22px;
+  border-radius: 16px;
+  background: var(--tint);
+}
+
+.land-steps b {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 1.700rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #cdcddb;
+}
+
+.land-steps h3,
+.land-features h3 {
+  margin: 16px 0 6px;
+  font-size: 1.050rem;
+  letter-spacing: -0.01em;
+}
+
+.land-steps p,
+.land-features p {
+  font-size: 0.900rem;
+  color: var(--muted);
+}
+
+.land-features li {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.land-themes li {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.land-themes li:hover {
+  box-shadow: 0 18px 40px rgba(20, 20, 31, 0.1);
+  transform: translateY(-2px);
+}
+
+.land-themes .theme-preview {
+  border: 0;
+  border-radius: 0;
+  font-size: 13px;
+}
+
+.land-themes .theme-preview__title {
+  font-size: 22px;
+}
+
+.land-themes li > div:last-child {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--line);
+}
+
+/* Only the caption under the picture; the miniature site inside keeps its own text styles. */
+.land-themes li > div:last-child strong {
+  font-size: 0.950rem;
+}
+
+.land-themes li > div:last-child span {
+  font-size: 0.820rem;
+  color: var(--muted);
+}
+
+/* ---- Dark band: Design Studio ---- */
+.land-dark {
+  padding: 68px 0;
+  background: #12121c;
+  color: #fff;
+}
+
+.land-dark__grid {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+
+.land-tag--dark {
+  margin-left: 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: #c9c3ff;
+}
+
+.land-dark p {
+  margin-top: 16px;
+  max-width: 32em;
+  color: #b9b9cb;
+}
+
+.land-dark ul {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+  font-size: 0.920rem;
+}
+
+.land-dark li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.land-dark li svg {
+  flex: none;
+  padding: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--purple);
+}
+
+.land-studio {
+  display: grid;
+  grid-template-columns: minmax(0, 0.900fr) minmax(0, 1.300fr);
+  gap: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  background: #fff;
+  color: var(--ink);
+}
+
+.land-studio__panel {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.land-studio__panel p {
+  margin: 0 0 2px;
+  font-size: 0.760rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.land-studio__panel span {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  font-size: 0.700rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.land-studio__panel span.is-active {
+  border-color: var(--purple);
+  background: var(--soft);
+}
+
+.land-studio__panel i {
+  flex: none;
+  width: 8px;
+  height: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.land-studio__panel i:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.land-studio__panel i:nth-child(3) {
+  margin-right: 6px;
+  border-radius: 0 4px 4px 0;
+}
+
+.land-studio__preview .theme-preview {
+  height: 100%;
+}
+
+/* ---- FAQ ---- */
+.land-faq {
+  display: grid;
+  gap: 10px;
+  margin-top: 36px;
+}
+
+.land-faq__item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.land-faq__item.is-open {
+  border-color: var(--purple);
+}
+
+.land-faq__item button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 16px 18px;
+  text-align: left;
+  font-size: 0.950rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.land-faq__item svg {
+  flex: none;
+  color: var(--muted);
+}
+
+.land-faq__item p {
+  padding: 0 18px 18px;
+  font-size: 0.900rem;
+  color: var(--ink-soft);
+}
+
+/* ---- Closing banner ---- */
+.land-cta {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 56px 24px;
+  border-radius: 24px;
+  background: var(--purple);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.land-cta::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -8%;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.land-cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.land .land-cta h2 {
+  font-size: clamp(1.600rem, 4.400vw, 2.300rem);
+  color: #fff;
+}
+
+.land-cta p {
+  max-width: 28em;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+/* ---- Footer ---- */
+.land-footer {
+  padding: 48px 0 24px;
+  border-top: 1px solid var(--line);
+  font-size: 0.880rem;
+  color: var(--muted);
+}
+
+.land-footer__grid {
+  display: grid;
+  gap: 32px;
+}
+
+.land-footer__grid p {
+  margin-top: 12px;
+  max-width: 24em;
+}
+
+.land-footer h2 {
+  margin-bottom: 12px;
+  font-size: 0.700rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.land-footer__grid a:not(:has(.land-brand)) {
+  display: block;
+  width: fit-content;
+  padding: 4px 0;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.land-footer__grid a:hover {
+  color: var(--purple);
+}
+
+.land-footer__bottom {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 0.800rem;
+}
+
+/* ------------------------------------------------------------------
+   Wider screens
+------------------------------------------------------------------ */
+@media (min-width: 700px) {
+  .land-wrap {
+    padding: 0 32px;
+  }
+
+  .land-steps,
+  .land-themes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .land-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .land-footer__grid {
+    grid-template-columns: 1.600fr 1fr 1fr;
+  }
+
+  .land-section,
+  .land-dark {
+    padding: 88px 0;
+  }
+}
+
+@media (min-width: 980px) {
+  .land-nav__toggle {
+    display: none;
+  }
+
+  .land-nav__links {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .land-nav__links a {
+    padding: 6px 0;
+    font-size: 0.900rem;
+  }
+
+  .land-hero {
+    padding: 80px 0 88px;
+  }
+
+  .land-hero__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.050fr);
+    gap: 64px;
+  }
+
+  .land-mock {
+    margin: 0 0 0 auto;
+  }
+
+  .land-steps,
+  .land-themes,
+  .land-features {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .land-dark__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.100fr);
+    gap: 72px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .land * {
+    transition: none !important;
+  }
+}
+
+/* The product picture fills its column instead of shrinking to its content. */
+.land-mock {
+  width: 100%;
+}
+
+.land-mock__browser .theme-preview__hero {
+  padding: 22px 18px 26px;
+}
+
+.land-mock__browser .theme-preview__tint {
+  padding: 16px 18px 40px;
+}
+
+.land-link,
+.land-brand {
+  white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+  .land-nav__inner {
+    gap: 8px;
+  }
+
+  .land-nav .land-btn--small {
+    padding: 8px 12px;
+  }
+}
+
+/* ---- Large screens: the page uses the width, with a standard margin at the sides ---- */
+@media (min-width: 1280px) {
+  .land-wrap:not(.land-wrap--narrow) {
+    max-width: 1760px;
+    padding: 0 64px;
+  }
+
+  .land-mock {
+    max-width: 640px;
+  }
+}
+
+/* ---- "Read more" on the steps and features ---- */
+.land-more {
+  margin-top: 14px;
+}
+
+.land-more ul {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 14px 0 0;
+  border-top: 1px solid rgba(20, 20, 31, 0.1);
+  list-style: none;
+}
+
+.land-more li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.920rem;
+  line-height: 1.55;
+  color: #4a4a5c;
+}
+
+.land-more li::before {
+  content: '';
+  position: absolute;
+  top: 0.62em;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #5b4dff;
+}
+
+.land-more button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  font-size: 0.880rem;
+  font-weight: 600;
+  color: #5b4dff;
+  cursor: pointer;
+}
+
+.land-more button:hover {
+  text-decoration: underline;
+}
+
+/* a card that is opened does not stretch its neighbours */
+.land-steps,
+.land-features {
+  align-items: start;
+}
+
+/* four steps: two per row, then all four in one row */
+@media (min-width: 700px) {
+  .land-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .land-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* The points inside a card are plain list rows, not cards themselves. */
+.land-steps .land-more li,
+.land-features .land-more li {
+  display: block;
+  margin: 0;
+  padding: 0 0 0 18px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* ---- Hero on large screens: the picture is bigger and reaches the right edge of the page ---- */
+@media (min-width: 1280px) {
+  .land-hero .land-mock {
+    max-width: 720px;
+    margin: 0 0 0 auto;
+  }
+
+  .land-hero .land-mock__browser .theme-preview {
+    font-size: 16px;
+  }
+
+  .land-hero .land-mock__browser .theme-preview__title {
+    font-size: 32px;
+  }
+
+  .land-hero .land-mock__browser .theme-preview__hero {
+    padding: 30px 26px 34px;
+  }
+
+  .land-hero .land-mock__browser .theme-preview__tint {
+    padding: 22px 26px 52px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Hero picture (HeroPicture in Landing.jsx)
+   Everything inside is sized in em of .hm__scale, which follows the
+   picture's width: 1em is 1/62 of it (10px when it is 620px wide).
+------------------------------------------------------------------ */
+.land-hero {
+  background: linear-gradient(105deg, #f8f7ff 0%, #efecff 55%, #e4defe 100%);
+}
+
+.hm {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.hm__scale {
+  position: relative;
+  font-size: calc(100cqw / 62);
+  padding: 4.2em 2.400em 5.400em 4em;
+  line-height: 1.35;
+  color: #14141f;
+}
+
+.hm b,
+.hm em,
+.hm i,
+.hm u,
+.hm s {
+  font-style: normal;
+  text-decoration: none;
+}
+
+/* ---- browser window ---- */
+.hm-browser {
+  border: 1px solid #e4e4ee;
+  border-radius: 1.400em;
+  background: #fff;
+  box-shadow: 0 3em 7em rgba(60, 50, 160, 0.2);
+  overflow: hidden;
+}
+
+.hm-browser__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.600em;
+  padding: 1.100em 1.400em;
+  background: #f1f0f8;
+}
+
+.hm-browser__bar i {
+  width: 0.900em;
+  height: 0.900em;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+
+.hm-browser__bar i:nth-child(2) {
+  background: #febc2e;
+}
+
+.hm-browser__bar i:nth-child(3) {
+  background: #28c840;
+}
+
+.hm-browser__bar span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.500em;
+  margin-left: 1.400em;
+  padding: 0.450em 1.200em 0.450em 0.900em;
+  border-radius: 0.700em;
+  background: #fff;
+  font-size: 1.150em;
+  color: #5c5c6e;
+}
+
+.hm-browser__bar svg {
+  width: 1em;
+  height: 1em;
+}
+
+.hm-site__nav {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  padding: 2.400em 4.400em 0;
+  font-size: 0.800em;
+  color: #3f3f4e;
+}
+
+.hm-site__nav b {
+  margin-right: auto;
+  font-size: 1.300em;
+  font-weight: 800;
+  color: #14141f;
+}
+
+.hm-site__nav em,
+.hm-site__buttons em {
+  padding: 0.650em 1.300em;
+  border-radius: 0.600em;
+  background: #14141f;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hm-site__hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 14em;
+  gap: 2em;
+  padding: 5em 0 4.600em 4.400em;
+  overflow: hidden;
+}
+
+.hm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.500em;
+  padding: 0.400em 0.900em;
+  border: 1px solid #e4e4ee;
+  border-radius: 99em;
+  background: #fff;
+  font-size: 0.650em;
+  color: #3f3f4e;
+}
+
+.hm-badge i {
+  width: 0.700em;
+  height: 0.700em;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.hm-site__title {
+  margin-top: 0.450em;
+  font-size: 2.700em;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.hm-site__role {
+  margin-top: 0.900em;
+  font-size: 0.850em;
+  font-weight: 600;
+  color: #5b4dff;
+}
+
+.hm-site__text {
+  margin-top: 1em;
+  max-width: 34em;
+  font-size: 0.800em;
+  line-height: 1.6;
+  color: #55556a;
+}
+
+.hm-site__buttons {
+  display: flex;
+  gap: 0.800em;
+  margin-top: 1.800em;
+  font-size: 0.800em;
+}
+
+.hm-site__buttons span {
+  padding: 0.650em 1.300em;
+  border: 1px solid #dcdce8;
+  border-radius: 0.600em;
+  font-weight: 700;
+}
+
+.hm-site__blob {
+  display: grid;
+  place-items: center;
+  width: 15em;
+  height: 15em;
+  margin-top: -1em;
+  border-radius: 50%;
+  background: linear-gradient(140deg, #c9d2ff 0%, #e4c4f5 55%, #fbd5e4 100%);
+  font-size: 1em;
+  font-weight: 800;
+  color: #2d2a8a;
+}
+
+.hm-site__blob {
+  font-size: 1em;
+  line-height: 1;
+}
+
+.hm-site__blob::first-letter {
+  font-size: 6em;
+}
+
+.hm-site__work {
+  padding: 3.400em 4.400em 0;
+  background: #f6f6fb;
+}
+
+.hm-site__work p {
+  font-size: 0.550em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5b4dff;
+}
+
+.hm-site__work b {
+  display: block;
+  margin-top: 0.200em;
+  font-size: 1.700em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hm-site__work div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  margin-top: 1.600em;
+}
+
+.hm-site__work i {
+  height: 3em;
+  border-radius: 0.800em 0.800em 0 0;
+  background: #e6e9ff;
+}
+
+.hm-site__work i:nth-child(2) {
+  background: #fde8dc;
+}
+
+.hm-site__work i:nth-child(3) {
+  background: #e1f3ea;
+}
+
+/* ---- phone ---- */
+.hm-phone {
+  position: absolute;
+  right: 0;
+  bottom: 1.400em;
+  z-index: 2;
+  width: 15.400em;
+  padding: 0.600em;
+  border-radius: 2.600em;
+  background: #161a2b;
+  box-shadow: 0 2.400em 5em rgba(20, 20, 60, 0.3);
+}
+
+.hm-phone__screen {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 30.600em;
+  padding: 2em 1.200em 0;
+  border-radius: 2.100em;
+  background: #f7f3ec;
+  overflow: hidden;
+}
+
+.hm-phone__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 2.600em;
+  font-size: 0.800em;
+}
+
+.hm-phone__nav b {
+  font-weight: 700;
+}
+
+.hm-phone__nav span {
+  width: 1.300em;
+  height: 0.900em;
+  border-top: 2px solid #14141f;
+  border-bottom: 2px solid #14141f;
+  background: linear-gradient(#14141f, #14141f) center / 100% 2px no-repeat;
+}
+
+.hm-phone__title {
+  margin-top: 0.700em;
+  font-size: 1.500em;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+.hm-phone__text {
+  margin-top: 0.900em;
+  font-size: 0.620em;
+  line-height: 1.55;
+  color: #55556a;
+}
+
+.hm-phone__screen > em,
+.hm-phone__ghost {
+  display: block;
+  width: 100%;
+  margin-top: 1.300em;
+  padding: 0.800em;
+  border-radius: 99em;
+  background: #ff6a45;
+  font-size: 0.680em;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+}
+
+.hm-phone__ghost {
+  margin-top: 0.700em;
+  border: 1px solid #dcd6ca;
+  background: transparent;
+  color: #14141f;
+}
+
+.hm-phone__card {
+  width: 100%;
+  margin-top: 1.400em;
+  padding: 2em 1.600em 0;
+  border-radius: 1.200em 1.200em 0 0;
+  background: #ff6a45;
+  flex: 1;
+}
+
+.hm-phone__card div {
+  height: 100%;
+  padding-bottom: 1em;
+  border-radius: 0.800em 0.800em 0 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.hm-phone__card i {
+  display: block;
+  height: 1.100em;
+  background: #cfc8ff;
+}
+
+.hm-phone__card u {
+  display: block;
+  width: 62%;
+  height: 0.450em;
+  margin: 0.800em 0 0 1em;
+  border-radius: 0.200em;
+  background: #d9d9e2;
+}
+
+.hm-phone__card u + u {
+  width: 44%;
+  margin-top: 0.500em;
+}
+
+.hm-phone__card s {
+  display: block;
+  width: 3.600em;
+  height: 2.400em;
+  margin: 1em 0 0 1em;
+  border-radius: 0.300em;
+  background: #dcd6ff;
+}
+
+/* ---- the two cards ---- */
+.hm-card {
+  position: absolute;
+  z-index: 3;
+  border: 1px solid #e9e9f2;
+  border-radius: 1.300em;
+  background: #fff;
+  box-shadow: 0 1.400em 3.400em rgba(20, 20, 60, 0.14);
+}
+
+.hm-live {
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 1.100em;
+  padding: 1.200em 1.800em 1.200em 1.400em;
+}
+
+.hm-live span {
+  display: grid;
+  place-items: center;
+  width: 2.800em;
+  height: 2.800em;
+  border-radius: 50%;
+  background: #15803d;
+  color: #fff;
+}
+
+.hm-live svg {
+  width: 1.500em;
+  height: 1.500em;
+}
+
+.hm-live p {
+  font-size: 1.150em;
+  color: #6b6b80;
+}
+
+.hm-live b {
+  display: block;
+  font-size: 1.100em;
+  font-weight: 700;
+  color: #14141f;
+}
+
+.hm-switch {
+  left: 0;
+  bottom: 0;
+  padding: 1.400em 1.500em 1.500em;
+}
+
+.hm-switch b {
+  font-size: 1.300em;
+  font-weight: 700;
+}
+
+.hm-switch div {
+  display: flex;
+  gap: 0.800em;
+  margin-top: 1em;
+}
+
+.hm-thumb {
+  position: relative;
+  width: 7em;
+  height: 4.400em;
+  border: 1px solid #e4e4ee;
+  border-radius: 0.700em;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* a headline, two lines and a row of blocks, drawn with shadows */
+.hm-thumb::before {
+  content: '';
+  position: absolute;
+  top: 0.900em;
+  left: 0.700em;
+  width: 3.400em;
+  height: 0.450em;
+  border-radius: 0.200em;
+  background: currentColor;
+  box-shadow: 0 0.800em 0 -0.050em currentColor, 0 1.500em 0 -0.100em currentColor;
+  opacity: 0.85;
+}
+
+.hm-thumb::after {
+  content: '';
+  position: absolute;
+  right: 0.600em;
+  bottom: 0.500em;
+  left: 0.700em;
+  height: 0.900em;
+  border-radius: 0.200em;
+  background: currentColor;
+  opacity: 0.14;
+}
+
+.hm-thumb--light {
+  color: #14141f;
+}
+
+.hm-thumb--dark {
+  border-color: #14141f;
+  background: #14141f;
+  color: #8f84ff;
+}
+
+.hm-thumb--cream {
+  border-color: #e6dccb;
+  background: #f1e9db;
+  color: #6b5a3c;
+}
+
+.hm-thumb.is-active {
+  border: 2px solid #5b4dff;
+}
+
+@media (min-width: 980px) {
+  .hm {
+    margin: 0 0 0 auto;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hm {
+    max-width: 760px;
+  }
+}
+
+/* ---- Hero picture: the three looks "Switch theme" chooses between ---- */
+.hm-browser {
+  --hm-bg: #ffffff;
+  --hm-ink: #14141f;
+  --hm-soft: #55556a;
+  --hm-accent: #5b4dff;
+  --hm-tint: #f6f6fb;
+  --hm-line: #dcdce8;
+  --hm-button: #14141f;
+  --hm-on-button: #ffffff;
+  --hm-blob: linear-gradient(140deg, #c9d2ff 0%, #e4c4f5 55%, #fbd5e4 100%);
+}
+
+.hm-look--dark {
+  --hm-bg: #12121c;
+  --hm-ink: #f4f4fa;
+  --hm-soft: #a9a9be;
+  --hm-accent: #a79bff;
+  --hm-tint: #1b1b29;
+  --hm-line: #34344a;
+  --hm-button: #8f84ff;
+  --hm-on-button: #12121c;
+  --hm-blob: linear-gradient(140deg, #5b4dff 0%, #8f5bff 55%, #ff7ac3 100%);
+}
+
+.hm-look--cream {
+  --hm-bg: #f7f1e6;
+  --hm-ink: #2b2118;
+  --hm-soft: #6b5a48;
+  --hm-accent: #b4532a;
+  --hm-tint: #efe5d3;
+  --hm-line: #d9cbb4;
+  --hm-button: #b4532a;
+  --hm-on-button: #ffffff;
+  --hm-blob: linear-gradient(140deg, #f3c9a0 0%, #e9a27c 55%, #d97a56 100%);
+}
+
+.hm-site {
+  background: var(--hm-bg);
+  color: var(--hm-ink);
+  transition: background 0.3s, color 0.3s;
+}
+
+.hm-site__nav,
+.hm-site__text {
+  color: var(--hm-soft);
+}
+
+.hm-site__nav b {
+  color: var(--hm-ink);
+}
+
+.hm-site__nav em,
+.hm-site__buttons em {
+  background: var(--hm-button);
+  color: var(--hm-on-button);
+}
+
+.hm-site__buttons span {
+  border-color: var(--hm-line);
+}
+
+.hm-site .hm-badge {
+  border-color: var(--hm-line);
+  background: var(--hm-bg);
+  color: var(--hm-soft);
+}
+
+.hm-site__role,
+.hm-site__work p {
+  color: var(--hm-accent);
+}
+
+.hm-site__blob {
+  background: var(--hm-blob);
+}
+
+.hm-site__work {
+  background: var(--hm-tint);
+  transition: background 0.3s;
+}
+
+.hm-look--dark .hm-site__work i {
+  opacity: 0.3;
+}
+
+/* the thumbnails are real buttons */
+.hm button.hm-thumb {
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.hm button.hm-thumb:hover {
+  transform: translateY(-0.150em);
+}
+
+.hm button.hm-thumb:focus-visible {
+  outline: 2px solid #5b4dff;
+  outline-offset: 2px;
+}
+
+/* ---- a more compact hero on large screens ---- */
+@media (min-width: 980px) {
+  .land-hero {
+    padding: 28px 0 36px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hm {
+    max-width: 620px;
+  }
+
+  .land-hero h1 {
+    font-size: 3.500rem;
+  }
+}
+
+.land-empty {
+  margin-top: 28px;
+  padding: 28px;
+  border: 1px dashed #cfcfe0;
+  border-radius: 14px;
+  text-align: center;
+  color: #6b6b80;
+}
+
+/* ---- On large screens the hero fills the first screen, so the next section starts below the fold ---- */
+@media (min-width: 980px) and (min-height: 560px) {
+  .land-hero {
+    display: grid;
+    align-items: center;
+    /* the screen minus the menu bar above the hero */
+    min-height: calc(100vh - 67px);
+    min-height: calc(100svh - 67px);
+  }
+}
+
+/* The picture grows with the height of the screen, so a tall first screen does not look empty. */
+@media (min-width: 1280px) and (min-height: 560px) {
+  .hm {
+    max-width: clamp(520px, 80vh, 820px);
+  }
+}
+
+/* ---- Large screens: the picture is wider and reaches towards the text ---- */
+@media (min-width: 1280px) {
+  .land-hero__grid {
+    grid-template-columns: minmax(0, 0.850fr) minmax(0, 1.150fr);
+    gap: 48px;
+  }
+
+  /* a wider window for the same height: 1em is now 1/74 of the picture's width */
+  .hm__scale {
+    font-size: calc(100cqw / 74);
+  }
+}
+
+@media (min-width: 1280px) and (min-height: 560px) {
+  .hm {
+    max-width: clamp(600px, 98vh, 980px);
+  }
+}
+
+/* ---- Hero: four short points about the product, under the buttons ---- */
+.land-hero .land-lead {
+  max-width: 34em;
+}
+
+.land-points {
+  display: grid;
+  gap: 14px 22px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(91, 77, 255, 0.16);
+  list-style: none;
+}
+
+.land-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.land-points span {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(60, 50, 160, 0.12);
+  color: #5b4dff;
+}
+
+.land-points p {
+  font-size: 0.860rem;
+  line-height: 1.45;
+  color: #5c5c70;
+}
+
+.land-points b {
+  display: block;
+  font-size: 0.940rem;
+  font-weight: 700;
+  color: #14141f;
+}
+
+@media (min-width: 560px) {
+  .land-points {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---- Large screens: text and picture share the width, with a small gap between them ---- */
+@media (min-width: 1280px) {
+  .land-hero__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  .hm__scale {
+    font-size: calc(100cqw / 68);
+  }
+}
+
+@media (min-width: 1280px) and (min-height: 560px) {
+  .hm {
+    max-width: clamp(520px, 84vh, 800px);
+  }
+}
